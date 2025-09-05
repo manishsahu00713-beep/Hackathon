@@ -1,3 +1,91 @@
+body {
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background: linear-gradient(120deg,#0b1937 0%,#2db3e2 90%);
+  color:#fff;
+  min-height:100vh;
+}
+#welcome-fullscreen {
+  position:fixed;top:0;left:0;width:100vw;height:100vh;
+  background:linear-gradient(120deg,#0b1937 0%,#2db3e2 90%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:999;
+  transition:opacity 0.75s cubic-bezier(.17,.67,.52,1);
+}
+.welcome-main {
+  width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.welcome-title {
+  font-family:'Dancing Script',cursive;
+  font-size:2.3em;
+  color:#b3ffff;text-shadow:0 2px 18px #25eaff85;
+  letter-spacing:.11em;
+  margin-bottom:.6em;
+  text-align: center;
+}
+.welcome-title span {color:#27fceb;}
+.welcome-team {
+  font-family:'Dancing Script',cursive;
+  font-size:1.6em;
+  color:#78f7fb;
+  margin-bottom:2.1em;
+  opacity:0.84;font-weight:700;letter-spacing:0.14em;
+  text-align: center;
+}
+.cta {
+  font-size:1.15em;padding:.60em 2.1em;
+  border-radius:16px;border:0;
+  background:linear-gradient(90deg,#91e3fd 5%,#1ad0dd 96%);
+  color:#003866;font-weight:800;
+  box-shadow:0 2px 19px #26d4fc7e;cursor:pointer;
+  outline:none;
+  transition:background .2s, color .2s;
+}
+.cta:hover {background:linear-gradient(90deg,#1ad0dd 5%,#91e3fd 96%);color:#09595f;}
+
+#main-app {opacity:0;transition:opacity .85s;}
+
+#main-navbar {
+  background:rgba(9,24,54,0.97);box-shadow:0 2px 38px #13f7fd19;
+  padding:.9em 1.5em;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.brand {
+  font-size:1.35em;font-weight:900;letter-spacing:.04em;
+  font-family:'Montserrat',sans-serif;color:#bbfbff;
+}
+.brand-team {
+  font-family:'Dancing Script',cursive;color:#5cf2fc;
+  font-size:1.18em;margin-left:8px;letter-spacing:.09em;
+  text-shadow:0 2px 10px #29cbe0a8;
+}
+.tab-menu {
+  display:flex;list-style:none;margin:0;padding:0;gap:1.3em;
+}
+.tab-menu li {
+  font-size:1.05em;cursor:pointer;color:#def;
+  width:auto;padding:.22em 1em;border-radius:1em;
+  font-weight:700;transition:background .19s
+}
+.tab-menu li.active, .tab-menu li:hover {
+  background:linear-gradient(90deg,#21f6fe22 25%,#48ebf773 90%);
+  color:#6bebfe;
+}
+.tabsection {display:none;animation:none;}
+.tabsection.active {display:block;animation:slideInTab .6s cubic-bezier(.2,.84,.56,.98);}
+@keyframes slideInTab {from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:none;}}
+.dashboard-hero {margin:55px auto 0 auto;text-align:center;}
+.dashboard-hero h2 {
+  font-family:'Dancing Script',cursive;
+  font-size:2em;color:#96feff;text-shadow:0 2px 11px #5cebfb;}
+.dashboard-hero p {margin-top:17px;font-size:1.26em;color:#cafdff;}
+.team-signature {
+  font-family:'Dancing Script',cursive;
+  font-size:1.6em;color:#7bf8ff;opacity:0.89;letter-spacing:0.08em;
+  text-shadow:0 2px 18px #19ebff49;
+  font-weight:700;
+  margin-top:28px; margin-bottom:18px;
+}
 .level-system {
   margin:28px auto 10px;
   background:rgba(23,45,57,0.28);
@@ -28,3 +116,22 @@
   border-radius:10px;background:linear-gradient(90deg,#47d5ff 10%,#18fcbe 98%);
 }
 #level-count {font-size:1.04em;color:#b6f0fe;}
+.monastery-grid {display:flex;flex-wrap:wrap;gap:22px;justify-content:center;}
+.mon-card {background:rgba(21,31,62,0.44);border-radius:15px;padding:15px 13px;max-width:230px;box-shadow:0 2px 18px #14eef273;}
+.mon-imgbox img {border-radius:9px;max-width:100%;max-height:110px;}
+.mon-title {font-weight:800;margin-top:10px;font-family:'Montserrat',sans-serif;color:#24f9f6;font-size:1.15em;}
+.mon-desc {font-size:.99em;color:#eabaf3;}
+.mon-card-btns {display:flex;gap:10px;margin:11px 0 0 0;}
+.mon-card-btns button {background:linear-gradient(90deg,#43ffe1 55%,#845cff 100%);color:#fff;border:none;border-radius:10px;padding:6px 17px;font-size:0.98em;cursor:pointer;font-weight:700;}
+.mon-card-btns button:hover {background:linear-gradient(90deg,#845cff 0%,#43ffe1 100%);}
+.culture-section {margin-bottom:17px;}
+.culture-section h3 {color:#49fff3;}
+.section-content, .culture-section ul {margin-bottom:14px;}
+@media (max-width:700px) {
+  #main-navbar {flex-direction:column;align-items:flex-start;padding:11px;}
+  .tab-menu {gap:.51em;}
+  .dashboard-hero h2 {font-size:1.25em;}
+  .team-signature {font-size:1.13em;}
+  .dashboard-hero p {font-size:1em;}
+  .monastery-grid {gap:12px;}
+}
