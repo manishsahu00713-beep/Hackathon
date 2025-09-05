@@ -6,272 +6,252 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700|Montserrat:900,700,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 <body>
-  <!-- BACKGROUND SLIDESHOW -->
-  <div id="bg-slideshow"></div>
-
-  <!-- WELCOME SCREEN -->
-  <div id="welcome-screen">
-    <div class="welcome-content">
-      <h1>WELCOME TO <span>SIKKIM</span></h1>
+  <!-- Welcome Overlay -->
+  <div id="welcome-fullscreen">
+    <div class="welcome-main">
+      <div class="welcome-title">WELCOME TO <span>SIKKIM</span></div>
+      <div class="welcome-team">– Xypher</div>
+      <button class="cta" id="enter-btn">Get Started</button>
     </div>
   </div>
 
-  <!-- HAMBURGER & DRAWER -->
-  <button id="menu-btn" aria-label="Open Menu">
-    <span class="menu-bar"></span>
-    <span class="menu-bar"></span>
-    <span class="menu-bar"></span>
-  </button>
-  <div id="nav-drawer">
-    <ul>
-      <li data-tab="dashboard">Home</li>
-      <li data-tab="monasteries">Monasteries</li>
-      <li data-tab="highlights">Culture</li>
-      <li data-tab="hotels">Hotels & Restaurants</li>
-      <li data-tab="map">Map</li>
-      <li data-tab="coupons">Coupons</li>
-    </ul>
-  </div>
-
+  <!-- Main App (hidden initially, appears on Get Started) -->
   <div id="main-app" style="opacity:0;">
-    <section id="dashboard" class="tabsection active animate__fadeIn">
-      <div class="hero">
-        <div class="herotext">
-          <h2>Welcome, Explorer</h2>
-          <h1 class="main-heading neon">Quest: <span>Sikkim</span></h1>
-          <p>Discover Sikkim’s spiritual & cultural icons. Check in at monasteries, earn rewards, and begin your adventure.</p>
-          <button class="cta" id="start-btn">Get Started</button>
-        </div>
-        <div class="heroimg">
-          <img src="1000020084.jpg" alt="Monastery" />
+    <nav id="main-navbar">
+      <div class="brand">Sikkim Explorer <span class="brand-team">– Xypher</span></div>
+      <ul class="tab-menu">
+        <li data-tab="dashboard" class="active">Dashboard</li>
+        <li data-tab="achievements">Achievements</li>
+        <li data-tab="culture">Culture</li>
+        <li data-tab="itinerary">Itinerary</li>
+        <li data-tab="monasteries">Monasteries</li>
+      </ul>
+    </nav>
+    <!-- DASHBOARD with LEVEL SYSTEM -->
+    <section id="dashboard" class="tabsection active">
+      <div class="dashboard-hero">
+        <h2>Welcome to Sikkim Explorer</h2>
+        <p>Start your journey, explore monasteries,<br> track achievements, and build your personalized itinerary!</p>
+        <div class="team-signature">– Xypher</div>
+        <!-- Level System -->
+        <div class="level-system">
+          <div><b>Your Level:</b> <span id="level-name" class="level-badge">Beginner</span></div>
+          <div class="level-bar-bg"><div id="level-bar" class="level-bar"></div></div>
+          <div id="level-count">Monasteries visited: <span id="visited-count">0</span>/7</div>
         </div>
       </div>
-      <div class="team-signature">– Team Xyphers</div>
     </section>
-    <section id="monasteries" class="tabsection">
-      <h2 class="section-heading">Explore Monasteries</h2>
-      <div class="monastery-grid"></div>
-      <div id="mon-modal" class="modal"><div class="modal-content"></div></div>
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="tabsection">
+      <h2 class="dashboard-hero">Achievements</h2>
+      <ul style="list-style:none;max-width:400px;margin:2em auto 0;padding:0;">
+        <li><b>✅ Monastery Master:</b> Visit all 7 main monasteries</li>
+        <li><b>✅ Culture Star:</b> Explore all culture sections</li>
+        <li><b>⏳ Adventurer:</b> Add at least 2 places to your itinerary</li>
+        <li><b>🚩 Level Up:</b> Reach Level 7</li>
+      </ul>
     </section>
-    <section id="map" class="tabsection">
-      <div class="glass-card">
-        <h2 class="section-heading">Sikkim Monasteries Map</h2>
-        <div id="mapid" style="height:400px;width:100%;border-radius:12px;margin-bottom:12px;"></div>
-        <div id="route-info" style="text-align:center;color:#addbee;font-weight:bold;"></div>
-        <p style="text-align:center;color:#7ecfff;font-size:0.95em;margin:0;padding-bottom:7px;">
-          📍 Tap <b>Locate</b> to jump to a place. Your location: <span style="color:#18dbff">blue dot</span>.
-        </p>
-      </div>
-    </section>
-    <section id="highlights" class="tabsection">
-      <h2 class="section-heading">Sikkim's Complete Cultural Highlights</h2>
-      <div class="glass-card culture-content">
-        <div class="culture-section">
-          <h3>🏔️ Ethnic Groups & Language</h3>
-          <ul>
-            <li><b>Lepchas:</b> "Rongkup" native group, animists, sacred lakes & Kanchenjunga</li>
-            <li><b>Bhutias:</b> Tibetan migrants, Buddhist, Sikkimese language, monastery builders</li>
-            <li><b>Nepalis:</b> Gorkha, Hindu/Buddhist, terrace farming, dominant population</li>
-            <li><b>Others:</b> Limbus, Sherpa, Gurung, Tamang</li>
-          </ul>
-        </div>
-        <div class="culture-section">
-          <h3>🎉 Festivals & Rituals</h3>
-          <ul>
-            <li><b>Pang Lhabsol:</b> Mask dances for Kanchenjunga, mountain guardian</li>
-            <li><b>Losoong, Saga Dawa, Drupka Teshi, Diwali, Dashain</b></li>
-          </ul>
-        </div>
-        <div class="culture-section">
-          <h3>🍛 Foods & Drinks</h3>
-          <ul>
-            <li>Momos, Phagshapa, Thukpa, Sel Roti, Chhurpi, Chang, Bamboo shoot curry</li>
-          </ul>
-        </div>
-        <div class="culture-section">
-          <h3>🎭 Dances/Arts</h3>
-          <ul>
-            <li>Cham, Maruni, Tamang Selo, Singhi Chham, Thangka, Bakhu, Dumdyam</li>
-          </ul>
-        </div>
-        <img src="1000020087.jpg" alt="Culture" class="highlight-img">
-      </div>
-    </section>
-    <section id="hotels" class="tabsection">
-      <h2 class="section-heading">Hotels & Restaurants Near Monasteries</h2>
-      <div class="glass-card hotel-restaurant-list">
-        <h3>Rumtek</h3>
+    <!-- CULTURE -->
+    <section id="culture" class="tabsection">
+      <h2 class="dashboard-hero">Culture</h2>
+      <div class="section-content">
+      <div class="culture-section">
+        <h3>🏔️ Ethnic Groups & Language</h3>
         <ul>
-          <li>Mayal Retreat Resort <button type="button" class="locate-btn" onclick="window.locatePlace(27.3172,88.5469,'hotel')">Locate</button></li>
-          <li>Norkhill Heritage Retreat <button type="button" class="locate-btn" onclick="window.locatePlace(27.3190,88.5472,'hotel')">Locate</button></li>
-          <li>Cafe Live & Loud <button type="button" class="locate-btn" onclick="window.locatePlace(27.3241,88.6118,'restaurant')">Locate</button></li>
+          <li><b>Lepchas:</b> The aboriginals, “Rongkup,” animists; Lepcha language, sacred lakes & Mt. Khangchendzonga.</li>
+          <li><b>Bhutias:</b> Tibetan roots, Buddhist, speak Sikkimese, major monastery builders.</li>
+          <li><b>Nepalis:</b> Gorkha heritage, Hindu or Buddhist, agricultural leaders.</li>
+          <li><b>Others:</b> Limbus, Sherpas, Gurungs, Tamangs, and more.</li>
         </ul>
       </div>
+      <div class="culture-section">
+        <h3>🎉 Festivals & Rituals</h3>
+        <ul>
+          <li><b>Pang Lhabsol:</b> August/September, mask dances, mountain guardian worship.</li>
+          <li><b>Losoong:</b> Sikkimese New Year, men’s archery, Cham masked dances.</li>
+          <li><b>Saga Dawa:</b> Celebrates Buddha’s birth, enlightenment, and parinirvana—processions and prayers at monasteries.</li>
+          <li><b>Tihar (Diwali):</b> Cow worship, Deusi-Bhailo, lights and song.</li>
+          <li><b>Dashain:</b> Family reunions, rituals, Nepali swings.</li>
+          <li><b>Drupka Teshi:</b> Buddha’s First Teaching.</li>
+          <li><b>Namsoong, Maghey Sankranti:</b> Lepcha/Nepali new years.</li>
+        </ul>
+      </div>
+      <div class="culture-section">
+        <h3>🍛 Unique Sikkimese Foods</h3>
+        <ul>
+          <li><b>Momos:</b> Steamed/fried dumplings with spicy tomato chutney.</li>
+          <li><b>Phagshapa:</b> Pork with radish and chillies.</li>
+          <li><b>Gundruk Soup:</b> Fermented greens soup, probiotic-packed.</li>
+          <li><b>Sael Roti:</b> Ring-shaped sweet fried bread, Nepali festivals.</li>
+          <li><b>Chhurpi:</b> Hardened Yak/Churpi cheese, traditional snack and ingredient.</li>
+          <li><b>Bamboo Shoot Curry (Tama):</b> Pickled bamboo shoots with black beans.</li>
+          <li><b>Thukpa:</b> Himalayan noodle soup, vegetarian or with meat.</li>
+          <li><b>Chang:</b> Homemade millet beer, served in bamboo mugs.</li>
+        </ul>
+      </div>
+      <div class="culture-section">
+        <h3>🎭 Traditional Dances & Music</h3>
+        <ul>
+          <li><b>Cham:</b> Masked sacred dance (Rumtek, Ralang, Enchey, Pemayangtse festivals)</li>
+          <li><b>Maruni:</b> Nepali joyous folk dance, festival centerpiece.</li>
+          <li><b>Tamang Selo:</b> Tamang community, rhythmic drums, vibrant costumes.</li>
+          <li><b>Singhi Chham:</b> Snow lion dance, Buddhist symbolism.</li>
+          <li><b>Chu Faat:</b> Indigenous Lepcha harvest dance.</li>
+          <li><b>Pangtoed Chaam:</b> Bhutia warrior dance.</li>
+        </ul>
+      </div>
+      <div class="culture-section">
+        <h3>🎨 Arts, Costumes & Handicrafts</h3>
+        <ul>
+          <li><b>Thangka:</b> Buddhist scroll paintings, intricate deities & mandalas.</li>
+          <li><b>Woodwork:</b> Doors, pillars, masks, furniture, prayer wheels.</li>
+          <li><b>Textiles:</b> Lepcha ‘Dumdyam’ & ‘Tago’ (colorful woven attire), Bhutia ‘Bakhu’ (long robe).</li>
+          <li><b>Carpet Weaving:</b> Wool rugs with geometric & religious symbols.</li>
+        </ul>
+      </div>
+      <div class="culture-section">
+        <h3>☑️ Daily Life/Values</h3>
+        <ul>
+          <li><b>Greetings:</b> “Tashi Delek” (Buddhist), “Namaste” (Hindu/Nepali), “Khamri Mo” (Lepcha).</li>
+          <li><b>Homes:</b> Built on hill-sides, mostly wood/stone, raised to avoid dampness, decorated for protection.</li>
+          <li><b>Faith:</b> Sacred lake, tree & mountain beliefs; prayer flags strung at every pass.</li>
+          <li><b>Eco Respect:</b> Sikkim is celebrated as a fully organic state—no chemical farming.</li>
+          <li><b>Marriage Rituals:</b> Liberal interethnic marriages, mixed Buddhist/Hindu customs.</li>
+        </ul>
+      </div>
+      <div class="culture-section">
+        <h3>📜 Monasteries & Architecture</h3>
+        <ul>
+          <li><b>Rumtek, Pemayangtse, Ralang, Dubdi:</b> Famous for murals, relics, old manuscripts, and festival venues.</li>
+          <li><b>Prayer Wheels:</b> Spinning clockwise brings merit—engraved with “Om Mani Padme Hum”.</li>
+          <li><b>Architecture:</b> Tiered roofs, richly painted doors, gold-leaf spires, Buddhist iconography everywhere.</li>
+          <li><b>Scripture Halls:</b> Libraries of ancient texts, thankas, and ritual objects.</li>
+        </ul>
+      </div>
+      </div>
     </section>
-    <section id="coupons" class="tabsection">
-      <h2 class="section-heading">Your Reward Coupons</h2>
-      <div class="coupon-card-wrap">
-        <div class="coupon-card">
-          <div class="coupon-title">15% OFF Rumtek Monastery</div>
-          <div class="coupon-code">Code: RMK2024X</div>
-          <div class="coupon-desc">Valid for monastery entry & shop</div>
+    <!-- ITINERARY -->
+    <section id="itinerary" class="tabsection">
+      <h2 class="dashboard-hero">Itinerary Planner</h2>
+      <div class="section-content">
+        <p style="opacity:.8;">Easily create and customize your Sikkim trip, add destinations, and get suggestions by interest.</p>
+      </div>
+    </section>
+    <!-- MONASTERIES (EXPLORATION GRID) -->
+    <section id="monasteries" class="tabsection">
+      <h2 class="dashboard-hero">Explore Monasteries</h2>
+      <div class="monastery-grid">
+        <!-- Rumtek -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020084.jpg" alt="Rumtek"></div>
+          <div class="mon-title">Rumtek</div>
+          <div class="mon-desc">Seat of the Karmapa, golden roofs, Kagyu rituals.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Rumtek_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.3158,88.5465','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Pemayangtse -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020087.jpg" alt="Pemayangtse"></div>
+          <div class="mon-title">Pemayangtse</div>
+          <div class="mon-desc">17th-century Nyingma gem, Zangdok Palri sculpture.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Pemayangtse_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.2945,88.2122','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Ralang -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020090.jpg" alt="Ralang"></div>
+          <div class="mon-title">Ralang</div>
+          <div class="mon-desc">Cham dances, grand murals, Buddhist festivals.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Ralang_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.219,88.366','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Dubdi -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020093.jpg" alt="Dubdi"></div>
+          <div class="mon-title">Dubdi</div>
+          <div class="mon-desc">Oldest Sikkim monastery, forest retreat.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Dubdi_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.3667,88.2167','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Phodong -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020092.jpg" alt="Phodong"></div>
+          <div class="mon-title">Phodong</div>
+          <div class="mon-desc">Kagyu heritage, vibrant murals, Cham dances.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Phodong_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.3668,88.6014','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Enchey -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020094.jpg" alt="Enchey"></div>
+          <div class="mon-title">Enchey</div>
+          <div class="mon-desc">Guardian of Gangtok, cave legend, chaam festival.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Enchey_Monastery','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.3389,88.6167','_blank');">Locate</button>
+          </div>
+        </div>
+        <!-- Tsuklakhang -->
+        <div class="mon-card">
+          <div class="mon-imgbox"><img src="1000020081.jpg" alt="Tsuklakhang"></div>
+          <div class="mon-title">Tsuklakhang</div>
+          <div class="mon-desc">Royal chapel, iconic prayer flags, relics.</div>
+          <div class="mon-card-btns">
+            <button type="button" onclick="window.open('https://en.wikipedia.org/wiki/Tsuklakhang_Palace','_blank');">Info</button>
+            <button type="button" onclick="window.open('https://www.google.com/maps/dir/?api=1&destination=27.334,88.613','_blank');">Locate</button>
+          </div>
         </div>
       </div>
     </section>
   </div>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // BACKGROUND SLIDESHOW LOGIC
-    const backgroundImgs=[
-      "Tsomgo-Lake.jpeg",
-      "Sikkim.jpg",
-      "mountains-gcd4ab473e_1280.jpg",
-      "Lachung-City-In-between-the-Mountain-Ranges.jpg",
-      "topmarch.jpg"
-    ];
-    const bgDiv=document.getElementById('bg-slideshow');
-    backgroundImgs.forEach((file,i)=>{
-      const img=document.createElement('img');
-      img.src=file; img.className='bgimg-slide';
-      if(i===0) img.classList.add('active');
-      bgDiv.appendChild(img);
-    });
-    let currentBg=0;
-    setInterval(()=>{
-      let slides=document.querySelectorAll('.bgimg-slide');
-      slides.forEach(im=>im.classList.remove('active'));
-      currentBg=(currentBg+1)%slides.length;
-      slides[currentBg].classList.add('active');
-    },7000);
-
-    // Welcome Animation Logic
-    window.addEventListener('DOMContentLoaded',()=>{
+    // Welcome fade-out, dashboard fade-in
+    document.getElementById('enter-btn').onclick = function() {
+      document.getElementById('welcome-fullscreen').style.opacity = 0;
       setTimeout(()=>{
+        document.getElementById('welcome-fullscreen').style.display = "none";
         document.getElementById('main-app').style.opacity = 1;
-        document.getElementById('welcome-screen').style.display = 'none';
-      }, 3500);
+      }, 900);
+    };
+
+    // Sliding tabs
+    document.querySelectorAll('.tab-menu li').forEach(li => {
+      li.onclick = function() {
+        document.querySelectorAll('.tab-menu li').forEach(x=>x.classList.remove('active'));
+        document.querySelectorAll('.tabsection').forEach(x=>x.classList.remove('active'));
+        li.classList.add('active');
+        let section = document.getElementById(li.dataset.tab);
+        if(section) section.classList.add('active');
+      };
     });
 
-    // Hamburger + Drawer Navigation
-    let navDrawer=document.getElementById("nav-drawer");
-    let menuBtn=document.getElementById("menu-btn");
-    menuBtn.onclick=function(e){navDrawer.classList.toggle("open");e.stopPropagation();}
-    document.body.onclick=function(e){
-      if(e.target.id!=="menu-btn" && !e.target.closest('#nav-drawer')) navDrawer.classList.remove('open');
-    }
-    navDrawer.querySelectorAll("li").forEach(li=>{
-      li.onclick=function(){navDrawer.classList.remove('open');showTab(li.getAttribute('data-tab'));}
-    });
-
-    // Tab logic
-    function showTab(id){
-      document.querySelectorAll('.tabsection').forEach(s=>s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      if(id==="monasteries") renderMonasteries();
-      if(id==="map" && !window.mapLoaded) initMap();
-    }
-    document.getElementById('start-btn').onclick = ()=>showTab('monasteries');
-
-    // Monasteries Data (now with Wikipedia links)
-    const monasteries=[
-      {name:"Rumtek",image:"1000020084.jpg",lat:27.3158,lng:88.5465,wiki:"https://en.wikipedia.org/wiki/Rumtek_Monastery",desc:"Kagyu seat, home of the Karmapa, golden roofs, vibrant rituals."},
-      {name:"Pemayangtse",image:"1000020087.jpg",lat:27.2945,lng:88.2122,wiki:"https://en.wikipedia.org/wiki/Pemayangtse_Monastery",desc:"17th-century Nyingma treasure, Zangdok Palri sculpture, relics."},
-      {name:"Ralang",image:"1000020090.jpg",lat:27.219,lng:88.366,wiki:"https://en.wikipedia.org/wiki/Ralang_Monastery",desc:"Cham dances, murals, Buddhist tradition."},
-      {name:"Dubdi",image:"1000020093.jpg",lat:27.3667,lng:88.2167,wiki:"https://en.wikipedia.org/wiki/Dubdi_Monastery",desc:"Oldest, forest monastery, Yuksom."},
-      {name:"Phodong",image:"1000020092.jpg",lat:27.3668,lng:88.6014,wiki:"https://en.wikipedia.org/wiki/Phodong_Monastery",desc:"Kagyu lineage, murals, mask dances."},
-      {name:"Enchey",image:"1000020094.jpg",lat:27.3389,lng:88.6167,wiki:"https://en.wikipedia.org/wiki/Enchey_Monastery",desc:"Solitary monastery, overlooking Gangtok."},
-      {name:"Tsuklakhang",image:"1000020081.jpg",lat:27.334,lng:88.613,wiki:"https://en.wikipedia.org/wiki/Tsuklakhang_Palace",desc:"Royal chapel, prayer flags, festivals."}
-    ];
-    const monasteryFacts=[
-      "Rumtek Monastery is Sikkim’s largest, hosting lamas from across the Himalayas.",
-      "Pemayangtse Monastery features Sikkim’s most detailed wooden Zangdok Palri sculpture.",
-      "Ralang Monastery is famous for its mask Cham dance during Pang Lhabsol.",
-      "Dubdi, 'The Retreat', is the oldest monastery, built in deep forest in 1701.",
-      "Phodong Monastery displays rare 18th-century murals.",
-      "Enchey’s annual festival draws huge crowds for Chaam masked dances.",
-      "Tsuklakhang was used for Sikkim’s royal ceremonies and sacred rituals.",
-      "Prayer wheels in Sikkim are spun clockwise for merit.",
-      "Monasteries double as Buddhist philosophy schools.",
-      "Om Mani Padme Hum is found everywhere, from prayer flags to walls."
-    ];
-    let factsInterval = null;
-    function showFact(idx=0){
-      document.querySelectorAll('.mon-fact').forEach((el,i)=>{
-        el.innerText = monasteryFacts[(idx+i) % monasteryFacts.length];
-      });
-    }
-    function startFactsRotator() {
-      let idx = 0; showFact(idx++);
-      if(factsInterval) clearInterval(factsInterval);
-      factsInterval = setInterval(()=>showFact(idx++), 10000);
-    }
-    function renderMonasteries() {
-      let grid=document.querySelector('.monastery-grid');
-      grid.innerHTML=monasteries.map((m,i)=>`
-        <div class="mon-card">
-          <div class="mon-imgbox"><img src="${m.image}" alt="${m.name}"></div>
-          <div class="mon-title">${m.name}</div>
-          <div class="mon-desc">${m.desc}</div>
-          <div class="mon-fact" style="margin:8px 0 0 0;font-size:0.97em;color:#daf5fd;min-height:2.1em;"></div>
-          <div class="mon-card-btns">
-            <button type="button" onclick="window.open('${m.wiki}','_blank'); event.stopPropagation();">Info</button>
-            <button type="button" onclick="window.locateMonastery(${i});event.stopPropagation();">Locate</button>
-          </div>
-        </div>
-      `).join('');
-      startFactsRotator();
-    }
-
-    // MAP and Locate
-    let map, userMarker, routeLine, tempPlaceMarker;
-    let userLoc = null;
-    function initMap(){
-      if(window.mapLoaded) return;
-      window.mapLoaded = true;
-      map = L.map('mapid').setView([27.33, 88.62], 8);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:16, attribution:'© OpenStreetMap contributors'}).addTo(map);
-      monasteries.forEach((m,i)=>{
-        L.marker([m.lat,m.lng])
-         .addTo(map)
-         .bindPopup(`<b>${m.name}</b><br>${m.desc}<br><button onclick="window.parent.locateMonastery(${i})">Locate</button>`)
-         .bindTooltip(m.name);
-      });
-      if("geolocation" in navigator){
-        navigator.geolocation.watchPosition(function(pos){
-          userLoc=[pos.coords.latitude,pos.coords.longitude];
-          if(!userMarker){
-            userMarker = L.circleMarker(userLoc, {radius:9,color:"#1feaff",fillColor:"#7fffd4",fillOpacity:0.9,weight:3})
-              .addTo(map).bindPopup("You are here!");
-          }
-          userMarker.setLatLng(userLoc);
-        }, undefined, { enableHighAccuracy:true });
-      }
-    }
-    window.locateMonastery=function(idx){
-      const dest=monasteries[idx];
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest.lat},${dest.lng}&travelmode=driving`,"_blank");
+    // Level system: For demo, advance "visited" by clicking team signature (for real: track user check-ins)
+    let visited = 0;
+    const levelNames = ["Beginner", "Novice", "Explorer", "Adept", "Expert", "Master", "Legend"];
+    document.querySelector('.team-signature').onclick = function() {
+      visited = Math.min(7, visited + 1);
+      updateLevel();
     };
-    window.locatePlace=function(lat, lng, type){
-      showTab('map');
-      if(map) {
-        if(tempPlaceMarker) map.removeLayer(tempPlaceMarker);
-        if(routeLine) map.removeLayer(routeLine);
-        let myIcon;
-        if(type==="hotel"){
-          myIcon=L.divIcon({html:`<div style="font-size:2em;line-height:1;">🏨</div>`,className:'',iconSize:[32,32],iconAnchor:[16,32]});
-        } else if(type==="restaurant"){
-          myIcon=L.divIcon({html:`<div style="font-size:2em;line-height:1;">🍽️</div>`,className:'',iconSize:[32,32],iconAnchor:[16,32]});
-        } else {
-          myIcon=L.divIcon({html:`<div style="font-size:2em;line-height:1;">📍</div>`,className:'',iconSize:[32,32],iconAnchor:[16,32]});
-        }
-        tempPlaceMarker = L.marker([lat,lng],{icon:myIcon}).addTo(map).bindPopup('Selected Place').openPopup();
-        map.setView([lat, lng], 16);
-        document.getElementById('route-info').innerHTML = `Centered to selected place.`;
-      }
-    };
+    function updateLevel() {
+      let level = Math.min(levelNames.length-1, Math.floor(visited));
+      document.getElementById('visited-count').innerText = visited;
+      document.getElementById('level-name').innerText = levelNames[level];
+      let pct = (visited/7)*100;
+      document.getElementById('level-bar').style.width = pct+"%";
+    }
+    updateLevel();
   </script>
 </body>
 </html>
