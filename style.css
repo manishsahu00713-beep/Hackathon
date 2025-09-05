@@ -1,137 +1,97 @@
 body {
   margin:0;
+  background: #0d111a;
   font-family:'Montserrat',sans-serif;
-  background: linear-gradient(120deg,#0b1937 0%,#2db3e2 90%);
-  color:#fff;
+  color:#d5f7ff;
   min-height:100vh;
 }
+/* GLOWING GAMER BACKGROUND */
+#game-bg {
+  position:fixed;
+  z-index:-1;
+  top:0; left:0; right:0; bottom:0;
+  width:100vw;height:100vh;
+  background:linear-gradient(130deg,#0b1c38 10%,#07626a 80%);
+  overflow:hidden;
+}
+#game-bg::after {
+  content:"";
+  position:absolute;top:5%;left:25%;
+  width:50vw;height:70vh;
+  background:radial-gradient(circle,#48fff4c4 0,#30def340 40%,#000 85%);
+  animation: gameRadial 6s alternate infinite cubic-bezier(.2,0,.69,.91);
+  opacity:.42;filter:blur(65px);
+}
+@keyframes gameRadial {
+  0% {left:25%;top:5%;}
+  100% {left:45%;top:13%;}
+}
+/* Welcome overlay */
 #welcome-fullscreen {
   position:fixed;top:0;left:0;width:100vw;height:100vh;
-  background:linear-gradient(120deg,#0b1937 0%,#2db3e2 90%);
+  background:rgba(8,25,62,0.97);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  z-index:999;
-  transition:opacity 0.75s cubic-bezier(.17,.67,.52,1);
+  z-index:999;transition:opacity 0.7s;
 }
-.welcome-main {
-  width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
-.welcome-title {
-  font-family:'Dancing Script',cursive;
-  font-size:2.3em;
-  color:#b3ffff;text-shadow:0 2px 18px #25eaff85;
-  letter-spacing:.11em;
-  margin-bottom:.6em;
-  text-align: center;
-}
-.welcome-title span {color:#27fceb;}
-.welcome-team {
-  font-family:'Dancing Script',cursive;
-  font-size:1.6em;
-  color:#78f7fb;
-  margin-bottom:2.1em;
-  opacity:0.84;font-weight:700;letter-spacing:0.14em;
-  text-align: center;
-}
-.cta {
-  font-size:1.15em;padding:.60em 2.1em;
-  border-radius:16px;border:0;
-  background:linear-gradient(90deg,#91e3fd 5%,#1ad0dd 96%);
-  color:#003866;font-weight:800;
-  box-shadow:0 2px 19px #26d4fc7e;cursor:pointer;
-  outline:none;
-  transition:background .2s, color .2s;
-}
-.cta:hover {background:linear-gradient(90deg,#1ad0dd 5%,#91e3fd 96%);color:#09595f;}
-
+.welcome-main {width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.welcome-title {font-family:'Dancing Script',cursive;font-size:2.5em;color:#1efaf7;text-shadow:0 2px 18px #18ebfcaa;letter-spacing:.17em;margin-bottom:.5em;text-align:center;}
+.welcome-title span {color:#1affbb;}
+.welcome-team {font-family:'Dancing Script',cursive;font-size:1.5em;color:#00e1ff;opacity:0.84;font-weight:700;letter-spacing:0.13em;text-align:center;}
+.cta {margin-top:30px;font-size:1.12em;padding:.48em 2em;border-radius:16px;border:0;background:linear-gradient(90deg,#1e8de0 2%,#16f0ff 96%);color:#081e31;font-weight:900;box-shadow:0 2px 19px #4adfbec0;cursor:pointer;outline:none;}
+.cta:hover {background:linear-gradient(90deg,#10f187 0%,#13beff 100%);color:#000;}
+/* NAV & TABS */
 #main-app {opacity:0;transition:opacity .85s;}
-
-#main-navbar {
-  background:rgba(9,24,54,0.97);box-shadow:0 2px 38px #13f7fd19;
-  padding:.9em 1.5em;display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:10;
-}
-.brand {
-  font-size:1.35em;font-weight:900;letter-spacing:.04em;
-  font-family:'Montserrat',sans-serif;color:#bbfbff;
-}
-.brand-team {
-  font-family:'Dancing Script',cursive;color:#5cf2fc;
-  font-size:1.18em;margin-left:8px;letter-spacing:.09em;
-  text-shadow:0 2px 10px #29cbe0a8;
-}
-.tab-menu {
-  display:flex;list-style:none;margin:0;padding:0;gap:1.3em;
-}
-.tab-menu li {
-  font-size:1.05em;cursor:pointer;color:#def;
-  width:auto;padding:.22em 1em;border-radius:1em;
-  font-weight:700;transition:background .19s
-}
-.tab-menu li.active, .tab-menu li:hover {
-  background:linear-gradient(90deg,#21f6fe22 25%,#48ebf773 90%);
-  color:#6bebfe;
-}
+#main-navbar {background:rgba(9,24,54,0.97);box-shadow:0 2px 38px #33f7fd44;padding:.9em 1.5em;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.brand {font-size:1.2em;font-weight:900;letter-spacing:.04em;font-family:'Montserrat',sans-serif;color:#b2faef;}
+.brand-team {font-family:'Dancing Script',cursive;color:#7ef8ff;font-size:1.1em;margin-left:8px;letter-spacing:.09em;text-shadow:0 2px 10px #00faff61;}
+.tab-menu {display:flex;list-style:none;margin:0;padding:0;gap:1.3em;}
+.tab-menu li {font-size:1em;cursor:pointer;color:#bcf5fa;padding:.25em 1.08em;border-radius:1em;font-weight:700;transition:background .22s, color .15s;box-shadow:0 2px 15px #fff0;}
+.tab-menu li.active, .tab-menu li:hover {background:linear-gradient(90deg,#12ffb966 10%,#41d8ee99 95%);color:#000;}
 .tabsection {display:none;animation:none;}
-.tabsection.active {display:block;animation:slideInTab .6s cubic-bezier(.2,.84,.56,.98);}
-@keyframes slideInTab {from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:none;}}
-.dashboard-hero {margin:55px auto 0 auto;text-align:center;}
-.dashboard-hero h2 {
-  font-family:'Dancing Script',cursive;
-  font-size:2em;color:#96feff;text-shadow:0 2px 11px #5cebfb;}
-.dashboard-hero p {margin-top:17px;font-size:1.26em;color:#cafdff;}
-.team-signature {
-  font-family:'Dancing Script',cursive;
-  font-size:1.6em;color:#7bf8ff;opacity:0.89;letter-spacing:0.08em;
-  text-shadow:0 2px 18px #19ebff49;
-  font-weight:700;
-  margin-top:28px; margin-bottom:18px;
-}
-.level-system {
-  margin:28px auto 10px;
-  background:rgba(23,45,57,0.28);
-  padding:22px 7px;
-  border-radius:18px;
-  box-shadow:0 2px 28px #11eafd12;
-  max-width:420px;
-  font-size:1.08em;
-  text-align:center;
-}
-.level-badge {
-  display:inline-block;
-  color:#fff;background:linear-gradient(90deg,#49e9fc 30%,#3ad8cf 90%);
-  font-family:'Montserrat',sans-serif;font-weight:800;
-  border-radius:18px;padding:2px 19px 2px 19px;
-  margin-left:11px;
-  font-size:1.13em;
-  letter-spacing:.12em;
-  box-shadow:0 2px 9px #31febb12;
-}
-.level-bar-bg {
-  width:96%;margin:12px auto 3px;height:12px;
-  border-radius:10px;background:#085163;
-  overflow:hidden;box-shadow:0 1px 4px #4fc3ff59;
-}
-.level-bar {
-  height:100%;transition:width .55s;
-  border-radius:10px;background:linear-gradient(90deg,#47d5ff 10%,#18fcbe 98%);
-}
-#level-count {font-size:1.04em;color:#b6f0fe;}
-.monastery-grid {display:flex;flex-wrap:wrap;gap:22px;justify-content:center;}
-.mon-card {background:rgba(21,31,62,0.44);border-radius:15px;padding:15px 13px;max-width:230px;box-shadow:0 2px 18px #14eef273;}
-.mon-imgbox img {border-radius:9px;max-width:100%;max-height:110px;}
-.mon-title {font-weight:800;margin-top:10px;font-family:'Montserrat',sans-serif;color:#24f9f6;font-size:1.15em;}
-.mon-desc {font-size:.99em;color:#eabaf3;}
-.mon-card-btns {display:flex;gap:10px;margin:11px 0 0 0;}
-.mon-card-btns button {background:linear-gradient(90deg,#43ffe1 55%,#845cff 100%);color:#fff;border:none;border-radius:10px;padding:6px 17px;font-size:0.98em;cursor:pointer;font-weight:700;}
-.mon-card-btns button:hover {background:linear-gradient(90deg,#845cff 0%,#43ffe1 100%);}
+.tabsection.active {display:block;animation:slideInTab .65s cubic-bezier(.19,.92,.54,.9);}
+@keyframes slideInTab {from{opacity:0;transform:translateY(60px) scale(0.95);} to{opacity:1;transform:none;}}
+/* GAMIFICATION */
+.team-signature {font-family:'Dancing Script',cursive;font-size:1.33em;color:#74eaff;opacity:0.89;letter-spacing:0.08em;text-shadow:0 2px 18px #5ffffa33;font-weight:700;margin:22px 0 9px;}
+.level-system {margin:24px auto 12px;background:rgba(27,60,87,0.39);padding:18px 7px;border-radius:18px;box-shadow:0 2px 28px #11eafd22;max-width:400px;font-size:1em;text-align:center;}
+.level-badge {display:inline-block;color:#fff;background:linear-gradient(90deg,#03e4d8 30%,#1ae2ff 90%);font-family:'Montserrat',sans-serif;font-weight:800;border-radius:18px;padding:2px 19px 2px 19px;margin-left:7px;font-size:1em;letter-spacing:.07em;}
+.level-bar-bg {width:96%;margin:12px auto 3px;height:13px;border-radius:10px;background:#0b3b4f;overflow:hidden;box-shadow:0 1px 6px #25eff94f;}
+.level-bar {height:100%;transition:width .75s cubic-bezier(.72,.06,.54,1.01);border-radius:10px;background:linear-gradient(90deg,#00ffd5 8%,#1cbcff 98%);}
+#level-count {font-size:1.08em;color:#b6f0fe;}
+/* ACHIEVEMENTS */
+.achievements-list {list-style:none;padding:0;max-width:400px;margin:2em auto 0;font-size:1.05em;}
+.achievements-list li {margin-bottom:13px;padding:7px 10px;border-radius:12px;background:rgba(28,35,62,0.13);box-shadow:0 2px 12px #0bfff322;}
+/* MONASTERIES CARDS */
+.monastery-grid {display:flex;flex-wrap:wrap;gap:22px;justify-content:center;margin:28px 0 10px 0;}
+.mon-card {background:rgba(21,38,62,0.61);border-radius:15px;padding:15px 13px;max-width:210px;box-shadow:0 2px 20px #04eaf241;position:relative;}
+.mon-imgbox img {border-radius:8px;max-width:100%;max-height:112px;display:block;margin:auto;}
+.mon-title {font-weight:800;margin-top:10px;font-family:'Montserrat',sans-serif;color:#14f6e6;font-size:1.12em;}
+.mon-desc {font-size:.96em;color:#e1d9f3;}
+.mon-card-btns {display:flex;gap:8px;margin:9px 0 0 0;}
+.mon-card-btns button {background:linear-gradient(90deg,#43ffe1 55%,#845cff 100%);color:#fff;border:none;border-radius:9px;padding:5px 14px;font-size:0.95em;cursor:pointer;font-weight:700;box-shadow:0 2px 8px #00ffde20;}
+.mon-card-btns button:hover {background:linear-gradient(90deg,#845cff 0%,#2effe1 100%);color:#fff;box-shadow:0 1px 14px #04ffe066;}
+/* HOTEL GROUPS */
+.hotel-section {display:flex;flex-wrap:wrap;gap:35px 22px;justify-content:center;}
+.hotel-group {background:rgba(19,38,47,0.43);padding:18px 12px 11px 12px;border-radius:14px;max-width:255px;box-shadow:0 2px 12px #21f8ec19;}
+.hotel-group h3 {font-size:1.15em;color:#41e9f7;margin-bottom:7px;}
+.hotel-group ul {padding-left:14px;}
+.hotel-group li {margin-bottom:8px;}
+.hotel-group button {margin-left:9px;font-weight:700;background:linear-gradient(90deg,#32e8df 30%,#1eabff 99%);color:#001c25;box-shadow:0 1px 7px #51f8d970;border:none;border-radius:6px;padding:3px 11px;font-size:.96em;cursor:pointer;}
+.hotel-group button:hover {background:linear-gradient(90deg,#1eabff 0%,#32e8df 80%);color:#fff;}
+/* MAP */
+#mapid {height:400px;margin:16px 0;border-radius:22px;box-shadow:0 2px 24px #17f7ff19;}
+.map-prompt {color:#56e5fc;font-size:1em;text-align:center;}
+.route-info {color:#1bf9f5;text-align:center;margin:0 0 6px 0;}
+/* CULTURE */
 .culture-section {margin-bottom:17px;}
-.culture-section h3 {color:#49fff3;}
+.culture-section h3 {color:#13fcd2();}
 .section-content, .culture-section ul {margin-bottom:14px;}
+/* Responsive */
 @media (max-width:700px) {
-  #main-navbar {flex-direction:column;align-items:flex-start;padding:11px;}
-  .tab-menu {gap:.51em;}
-  .dashboard-hero h2 {font-size:1.25em;}
-  .team-signature {font-size:1.13em;}
+  #main-navbar {flex-direction:column;align-items:flex-start;padding:9px;}
+  .tab-menu {gap:.48em;}
+  .dashboard-hero h2 {font-size:1.2em;}
+  .team-signature {font-size:1.05em;}
   .dashboard-hero p {font-size:1em;}
-  .monastery-grid {gap:12px;}
+  .monastery-grid, .hotel-section {gap:10px;}
+  .mon-card,.hotel-group {max-width:97vw;}
 }
